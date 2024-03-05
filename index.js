@@ -68,9 +68,6 @@ app.all('/', (req, res) => {
             console.log("body is defined")
             // If the body is provided, send it as the response
             res.status(code).json(body);
-        } else {
-            console.log("body is not defined")
-            res.status(code).end();
         }
 
         if (with_res !== undefined) {
