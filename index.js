@@ -53,27 +53,32 @@ app.all('/', (req, res) => {
 
     try {
         if (code === undefined || isNaN(code)) {
+            console.log("code is not defined");
             res.status(400).json({ message: "code must be provided." });
         }
 
         if (with_res !== undefined){
+            console.log("with_ref is defined")
             if (with_res === true) {
+                console.log("with_ref is true")
                 // Sending response with error code and description
                 res.status(code).json({ message: getErrorMessage(code) });
             } else{
+                console.log("with_ref is false")
                 // Setting status code without sending any response body
                 res.status(code).end();
             }
         }else{
+            console.log("with_ref is undefined")
             if (body !== undefined) {
+                console.log("body is defined")
                 // If the body is provided, send it as the response
                 res.status(code).json(body);
             }else{
+                console.log("body is not defined")
                 res.status(code).end();
             }
         }
-
-
 
 
     } catch (e) {
