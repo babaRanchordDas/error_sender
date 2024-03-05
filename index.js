@@ -74,7 +74,7 @@ app.all('/', (req, res) => {
                 // Setting status code without sending any response body
                 res.status(code).end();
             }
-        }else{
+        } else {
             res.status(code).end();
         }
 
@@ -86,44 +86,23 @@ app.all('/', (req, res) => {
     }
 });
 
-app.all('/error',(req,res)=>{
+function errorHandler(err, req, res, next) {
+    if (err.status) {
+        // If the error has a status code, return it
+        res.status(err.status).json({error: err.message});
+    } else {
+        // Otherwise, return a generic 500 status code
+        res.status(500).json({error: "Internal Server Error"});
+    }
+}
+
+app.use(errorHandler);
+
+app.all('/error', (req, res) => {
     const {code} = req.body;
-
-    // try {
-
-        // Some code that might throw an error
-            switch (code) {
-                case 500:
-                    throw new Error("Internal Server Error");
-                case 501:
-                    throw new Error("Not Implemented");
-                case 502:
-                    throw new Error("Bad Gateway");
-                case 503:
-                    throw new Error("Service Unavailable");
-                case 504:
-                    throw new Error("Gateway Timeout");
-                case 505:
-                    throw new Error("HTTP Version Not Supported");
-                case 506:
-                    throw new Error("Variant Also Negotiates");
-                case 507:
-                    throw new Error("Insufficient Storage");
-                case 508:
-                    throw new Error("Loop Detected");
-                case 510:
-                    throw new Error("Not Extended");
-                case 511:
-                    throw new Error("Network Authentication Required");
-                default:
-                    throw new Error("Unknown Error");
-            }
-    // } catch (error) {
-    //     console.error(error.message); // Output: Service Unavailable
-    //     res.status(400).json({message:"on available for 5XX group."})
-    // }
-
-})
+    // Some code that might throw an error
+    throwHTTPError(code);
+});
 
 // app.listen(process.env.PORT || 3000)
 
