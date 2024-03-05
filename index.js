@@ -53,17 +53,24 @@ app.all('/', (req, res) => {
 
     try {
         if (code === undefined || isNaN(code)) {
-            res.status(400).json({ message: "code must be provided" });
+            res.status(400).json({ message: "code must be provided." });
         }
 
-        if (with_res === true) {
-            // Sending response with error code and description
-            res.status(code).json({ message: getErrorMessage(code) });
-        } else if (body !== undefined) {
+        if (body !== undefined) {
             // If the body is provided, send it as the response
             res.status(code).json(body);
-        } else {
-            // Setting status code without sending any response body
+        }
+
+        if (with_res !== undefined){
+
+            if (with_res === true) {
+                // Sending response with error code and description
+                res.status(code).json({ message: getErrorMessage(code) });
+            } else{
+                // Setting status code without sending any response body
+                res.status(code).end();
+            }
+        }else{
             res.status(code).end();
         }
     } catch (e) {
