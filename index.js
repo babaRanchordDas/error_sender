@@ -56,13 +56,7 @@ app.all('/', (req, res) => {
             res.status(400).json({ message: "code must be provided." });
         }
 
-        if (body !== undefined) {
-            // If the body is provided, send it as the response
-            res.status(code).json(body);
-        }
-
         if (with_res !== undefined){
-
             if (with_res === true) {
                 // Sending response with error code and description
                 res.status(code).json({ message: getErrorMessage(code) });
@@ -71,8 +65,17 @@ app.all('/', (req, res) => {
                 res.status(code).end();
             }
         }else{
-            res.status(code).end();
+            if (body !== undefined) {
+                // If the body is provided, send it as the response
+                res.status(code).json(body);
+            }else{
+                res.status(code).end();
+            }
         }
+
+
+
+
     } catch (e) {
         // Handling any exceptions and setting status code without sending any response body
         console.error("Error:", e.message);
