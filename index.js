@@ -89,13 +89,14 @@ app.all('/', (req, res) => {
 app.all('/error',(req,res)=>{
     const {code} = req.body;
 
-    try {
+    // try {
+        if (code > 499 && code <600)
         // Some code that might throw an error
         throwHTTPError(code);
-    } catch (error) {
-        console.error(error.message); // Output: Service Unavailable
-        res.status(400).json({message:"on available for 5XX group."})
-    }
+    // } catch (error) {
+    //     console.error(error.message); // Output: Service Unavailable
+    //     res.status(400).json({message:"on available for 5XX group."})
+    // }
 
 })
 
