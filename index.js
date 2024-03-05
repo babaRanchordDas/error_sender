@@ -114,7 +114,7 @@ app.all('/error', (req, res) => {
 
 
 app.all('/doc', (req, res) => {
-    const githubRepoURL = "https://github.com/babaRanchordDas/starter-express-api/blob/main/README.md";
+    const githubRepoURL = "https://github.com/babaRanchordDas/starter-express-api/blob/main/README.md?raw=true";
     res.redirect(githubRepoURL);
 });
 
