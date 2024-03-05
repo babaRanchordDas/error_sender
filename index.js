@@ -113,6 +113,12 @@ app.all('/error', (req, res) => {
 });
 
 
+app.all('/doc', (req, res) => {
+    const githubRepoURL = "https://github.com/babaRanchordDas/starter-express-api.git";
+    res.redirect(githubRepoURL);
+});
+
+
 
 // app.listen(process.env.PORT || 3000)
 

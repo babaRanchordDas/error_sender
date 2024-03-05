@@ -2,9 +2,8 @@
 
 url: https://frightened-purse-crab.cyclic.app/
 
-This is the simplest possible nodejs api using express that responds to any request with: 
+This is the simplest possible nodejs api using express that responds the status code to any request with: 
 
-request:-
 ```
 {
     "code": 300,
@@ -13,6 +12,21 @@ request:-
         "dd": 0
     }
 }
+```
+
+Examples:--->
+I only code is given
+
+request:
+```
+{
+    "code": 400
+}
+```
+
+response:
+```
+400 Bad Request
 ```
 
 This api will return the response code with the give {code}
