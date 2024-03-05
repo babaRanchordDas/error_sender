@@ -1,8 +1,24 @@
 const express = require('express')
 const app = express()
 
+const errorHandler = (err, req, res, next)=> {
+    if (err.status) {
+        // If the error has a status code, return it
+        res.status(err.status).json({error: err.message});
+    } else {
+        // Otherwise, return a generic 500 status code
+        res.status(500).json({error: "Internal Server Error"});
+    }
+}
 // Middleware to parse JSON request body
 app.use(express.json());
+
+app.all('/timeout',(req,res)=>{
+    console.log("timeout")
+});
+
+
+app.use(errorHandler);
 // const indexRouter = require('./errorR');
 
 // app.all('/', (req, res) => {
@@ -86,17 +102,9 @@ app.all('/', (req, res) => {
     }
 });
 
-function errorHandler(err, req, res, next) {
-    if (err.status) {
-        // If the error has a status code, return it
-        res.status(err.status).json({error: err.message});
-    } else {
-        // Otherwise, return a generic 500 status code
-        res.status(500).json({error: "Internal Server Error"});
-    }
-}
 
-app.use(errorHandler);
+
+
 
 app.all('/error', (req, res) => {
     const {code} = req.body;
@@ -104,9 +112,7 @@ app.all('/error', (req, res) => {
     throwHTTPError(code);
 });
 
-app.all('/timeout',(req,res)=>{
-   console.log("timeout")
-});
+
 
 // app.listen(process.env.PORT || 3000)
 
