@@ -49,50 +49,50 @@ app.use(express.json());
 app.all('/', (req, res) => {
     console.log("working in error==>", req.body);
 
-    const { code, with_res, body } = req.body;
-    try{
-        if (with_res === undefined && body===undefined && code !== undefined){
+    const {code, with_res, body} = req.body;
+    try {
+        if (with_res === undefined && body === undefined && code !== undefined) {
             res.status(code).end()
         }
-    }catch (e) {
+    } catch (e) {
 
     }
 
     try {
         if (code === undefined || isNaN(code)) {
             console.log("code is not defined");
-            res.status(400).json({ message: "code must be provided." });
+            res.status(400).json({message: "code must be provided."});
         }
 
-        if (with_res !== undefined){
+        if (body !== undefined) {
+            console.log("body is defined")
+            // If the body is provided, send it as the response
+            res.status(code).json(body);
+        } else {
+            console.log("body is not defined")
+            res.status(code).end();
+        }
+
+        if (with_res !== undefined) {
             console.log("with_ref is defined")
             if (with_res === true) {
                 console.log("with_ref is true")
                 // Sending response with error code and description
-                res.status(code).json({ message: getErrorMessage(code) });
-            } else{
+                res.status(code).json({message: getErrorMessage(code)});
+            } else {
                 console.log("with_ref is false")
                 // Setting status code without sending any response body
                 res.status(code).end();
             }
-        }else if (body !== undefined) {
-                console.log("body is defined")
-                // If the body is provided, send it as the response
-                res.status(code).json(body);
-            }else{
-                console.log("body is not defined")
-                res.status(code).end();
-            }
-
+        }
 
 
     } catch (e) {
         // Handling any exceptions and setting status code without sending any response body
         console.error("Error:", e.message);
-        res.status(code).json({ message: getErrorMessage(code) }).end();
+        res.status(code).json({message: getErrorMessage(code)}).end();
     }
 });
-
 
 
 // app.listen(process.env.PORT || 3000)
@@ -226,4 +226,5 @@ function getErrorMessage(code) {
             return "Unknown Error Code";
     }
 }
+
 module.exports = app;
