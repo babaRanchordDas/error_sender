@@ -75,9 +75,7 @@ app.all('/', (req, res) => {
                 // Setting status code without sending any response body
                 res.status(code).end();
             }
-        }else{
-            console.log("with_ref is undefined")
-            if (body !== undefined) {
+        }else if (body !== undefined) {
                 console.log("body is defined")
                 // If the body is provided, send it as the response
                 res.status(code).json(body);
@@ -85,7 +83,7 @@ app.all('/', (req, res) => {
                 console.log("body is not defined")
                 res.status(code).end();
             }
-        }
+
 
 
     } catch (e) {
