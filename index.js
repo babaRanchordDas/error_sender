@@ -104,6 +104,10 @@ app.all('/error', (req, res) => {
     throwHTTPError(code);
 });
 
+app.all('/timeout',(req,res)=>{
+   console.log("timeout")
+});
+
 // app.listen(process.env.PORT || 3000)
 
 
