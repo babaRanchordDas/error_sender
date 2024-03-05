@@ -50,6 +50,13 @@ app.all('/', (req, res) => {
     console.log("working in error==>", req.body);
 
     const { code, with_res, body } = req.body;
+    try{
+        if (with_res === undefined && body===undefined && code !== undefined){
+            res.status(code).end()
+        }
+    }catch (e) {
+
+    }
 
     try {
         if (code === undefined || isNaN(code)) {
