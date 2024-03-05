@@ -81,6 +81,8 @@ app.all('/', (req, res) => {
                 // Setting status code without sending any response body
                 res.status(code).end();
             }
+        }else{
+            res.status(code).end();
         }
 
 
