@@ -90,9 +90,34 @@ app.all('/error',(req,res)=>{
     const {code} = req.body;
 
     // try {
-        if (code > 499 && code <600)
+
         // Some code that might throw an error
-        throwHTTPError(code);
+            switch (code) {
+                case 500:
+                    throw new Error("Internal Server Error");
+                case 501:
+                    throw new Error("Not Implemented");
+                case 502:
+                    throw new Error("Bad Gateway");
+                case 503:
+                    throw new Error("Service Unavailable");
+                case 504:
+                    throw new Error("Gateway Timeout");
+                case 505:
+                    throw new Error("HTTP Version Not Supported");
+                case 506:
+                    throw new Error("Variant Also Negotiates");
+                case 507:
+                    throw new Error("Insufficient Storage");
+                case 508:
+                    throw new Error("Loop Detected");
+                case 510:
+                    throw new Error("Not Extended");
+                case 511:
+                    throw new Error("Network Authentication Required");
+                default:
+                    throw new Error("Unknown Error");
+            }
     // } catch (error) {
     //     console.error(error.message); // Output: Service Unavailable
     //     res.status(400).json({message:"on available for 5XX group."})
