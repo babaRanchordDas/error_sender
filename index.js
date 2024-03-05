@@ -76,7 +76,7 @@ app.all('/', (req, res) => {
     } catch (e) {
         // Handling any exceptions and setting status code without sending any response body
         console.error("Error:", e.message);
-        res.status(400).json({ message: "Invalid request" }).end();
+        res.status(code).json({ message: getErrorMessage(code) }).end();
     }
 });
 
