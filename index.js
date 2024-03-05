@@ -18,21 +18,27 @@ app.all('/', (req, res) =>
 
     let { code, with_res, body } = req.body; // Assuming the error code, with_res flag, and body are sent in the request body
     console.log("code: ", code, "with_res", with_res);
-    try {
-        if (with_res !==undefined && with_res === true) {
-            // Sending response with error code and description
-            res.status(code).json({ message: getErrorMessage(code) });
-        } else if (body !== undefined) {
-            // If the body is provided, send it as the response
-            res.status(code).json(body);
-        } else {
-            // Setting status code without sending any response body
-            res.status(code).end();
+    try{
+        try {
+            if (with_res !==undefined && with_res === true) {
+                // Sending response with error code and description
+                res.status(code).json({ message: getErrorMessage(code) });
+            } else if (body !== undefined) {
+                // If the body is provided, send it as the response
+                res.status(code).json(body);
+            } else {
+                // Setting status code without sending any response body
+                res.status(code).end();
+            }
+        } catch (e) {
+            // Handling any exceptions and setting status code without sending any response body
+            res.status(code).json({message:getErrorMessage(code)}).end();
         }
-    } catch (e) {
-        // Handling any exceptions and setting status code without sending any response body
-        res.status(400).json({message:"internal error/provide proper body"}).end();
+    }catch (e){
+        res.status(400).json({message:"bad request"}).end();
+
     }
+
 }
 
 );
