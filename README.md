@@ -8,7 +8,7 @@ This is the simplest possible nodejs api using express that responds the status 
 {
     "code": 300,
     "with_res": false,
-    "body": {
+    "data": {
         "dd": 0
     }
 }
@@ -58,7 +58,7 @@ request:
 {
     "code": 503,
     "with_res": false,
-    "body": {
+    "data": {
         "dd": 0
     }
 }
