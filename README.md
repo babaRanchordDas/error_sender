@@ -12,6 +12,10 @@ The Error Sender API is a simple Node.js API built with Express that allows user
 
 ## Usage
 
+## URL
+https://frightened-purse-crab.cyclic.app/
+
+
 ### Sending Status Codes
 
 Send a request with the desired status code. The API will respond with the corresponding HTTP status code.
