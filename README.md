@@ -13,7 +13,7 @@ The Error Sender API is a simple Node.js API built with Express that allows user
 ## Usage
 
 ## URL
-https://starter-express-api-f1yw.onrender.com
+https://error-sender.onrender.com
 
 ### Sending Status Codes
 
