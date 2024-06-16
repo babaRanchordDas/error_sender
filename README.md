@@ -13,7 +13,7 @@ The Error Sender API is a simple Node.js API built with Express that allows user
 ## Usage
 
 ## URL
-
+https://starter-express-api-f1yw.onrender.com
 
 ### Sending Status Codes
 
@@ -76,11 +76,6 @@ Response:
 }
 ```
 
-## Deployment
-
-Deploy the Error Sender API effortlessly using the Cyclic platform.
-
-[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
 
 ## Cause
 
