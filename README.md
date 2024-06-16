@@ -13,7 +13,6 @@ The Error Sender API is a simple Node.js API built with Express that allows user
 ## Usage
 
 ## URL
-https://frightened-purse-crab.cyclic.app/
 
 
 ### Sending Status Codes
